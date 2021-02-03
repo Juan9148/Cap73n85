@@ -9,11 +9,12 @@ require('./database/config').dbConnection();
 const app = express();
 
 // Lectura y parseo del Body
-app.use( express.json() );
+app.use(express.json());
 
 // Mis Rutas (es un midleware que son funciones en node 
-app.use( '/api/login', require( './routes/auth') );
-
+app.use('/api/login', require('./routes/auth'));
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/mensajes', require('./routes/mensajes'));
 
 
 // Node Server
@@ -25,19 +26,18 @@ require('./sockets/socket');
 
 
 // Path público
-const publicPath = path.resolve( __dirname, 'public' );
-app.use( express.static( publicPath ) );
+const publicPath = path.resolve(__dirname, 'public');
+app.use(express.static(publicPath));
 
 
 
 
 
-server.listen( process.env.PORT, ( err ) => {
 
-    if ( err ) throw new Error(err);
+server.listen(process.env.PORT, (err) => {
 
-    console.log('Servidor corriendo en puerto', process.env.PORT );
+    if (err) throw new Error(err);
+
+    console.log('Servidor corriendo en puerto', process.env.PORT);
 
 });
-
-
